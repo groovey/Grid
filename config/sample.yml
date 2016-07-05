@@ -1,0 +1,44 @@
+search:
+
+    1
+filter:
+
+    2
+
+actions:
+
+
+
+
+sql:
+
+    SELECT * FROM sample
+
+listing:
+    -
+        header:
+            label: Id
+            type: text
+            sortable: true
+            align: center
+            field: a.id
+            width: 40px
+
+        data:
+            type: text
+            align: center
+            row: id
+    -
+        header:
+            label: Status
+            type: text
+            sortable: true
+            align: center
+            field: s.id
+            width: 60px
+
+        data:
+            type: text
+            align: center
+            row: status
+form:

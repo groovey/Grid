@@ -1,0 +1,21 @@
+{
+    "name": "groovey/grid",
+    "description": "Groovey Grid Package",
+    "authors": [
+        {
+            "name": "pokoot",
+            "email": "pokoot@gmail.com"
+        }
+    ],
+    "require": {
+        "silex/silex" : "~2.0",
+        "symfony/yaml" : "~3.0",
+        "twig/twig" : "~1.24",
+        "groovey/helper" : "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Groovey\\Grid\\": "src"
+        }
+    }
+}
