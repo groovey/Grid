@@ -1,7 +1,7 @@
 {% for data in datas %}
 <tr>
     {%for value in data %}
-    <td class="{{value['align']}}">{{value['row']}}</td>
+    <td class="{{value['align']}}">{{value['row']|e}}</td>
     {% endfor%}
 </tr>
 {% endfor%}

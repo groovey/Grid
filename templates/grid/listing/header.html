@@ -1,5 +1,5 @@
 <tr>
     {% for data in datas %}
-    <th width="{{data.width}}" class="sorting_asc" tabindex="0" rowspan="1" colspan="1">{{data.label}}</th>
+    <th width="{{data.width}}" class="sorting_asc" tabindex="0" rowspan="1" colspan="1">{{data.label|raw}}</th>
     {% endfor %}
 </tr>

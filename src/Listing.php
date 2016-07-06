@@ -27,11 +27,21 @@ class Listing
 
         $datas = [];
         foreach ($yaml['listing'] as $value) {
-            extract($value['header']);
+            $header = $value['header'];
+
+            $custom = element('custom', $header);
+            $label  = element('label', $header);
+            $width  = element('width', $header);
+
+            if ($custom) {
+                $class  = element('class', $custom);
+                $action = element('action', $custom);
+                $label  = call_user_func([__NAMESPACE__.'\\'.$class, $action], []);
+            }
 
             $datas[] = [
-                'label' => coalesce($label),
-                'width' => coalesce($width),
+                'label' => $label,
+                'width' => $width,
             ];
         }
 

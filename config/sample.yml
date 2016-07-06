@@ -12,7 +12,7 @@ actions:
 
 sql:
 
-    SELECT * FROM users LIMIT 1
+    SELECT * FROM users LIMIT 10
 
 listing:
     -
@@ -37,7 +37,16 @@ listing:
 
     -
         header:
+            custom: { class: custom, action: header}
+
+        body:
+            custom: { class: custom, action: body}
+
+
+    -
+        header:
             label: Actions
+
         body:
             align: center
             row: test

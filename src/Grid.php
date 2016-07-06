@@ -7,6 +7,7 @@ use Symfony\Component\Yaml\Yaml;
 class Grid
 {
     public $listing;
+    public $entry;
 
     public function __construct($templatesPath, $cachePath)
     {

@@ -25,13 +25,12 @@ $app->register(new ORMServiceProvider(), [
 
 $app->register(new GridServiceProvider(),[
         'grid.templates' => __DIR__. '/templates/grid',
-        'grid.cache'     => __DIR__. '/cache',
+        // 'grid.cache'     => __DIR__. '/cache',
     ]);
 
 
 $app['db']->connection();
 $app['grid']->load('./config/sample.yml');
-
 
 ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">
