@@ -36,10 +36,10 @@ $app['grid']->load('./config/sample.yml');
 ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
-        <?= $app['grid']->render('listing-header'); ?>
+        <?= $app['grid']->listing->render('header'); ?>
     </thead>
     <tbody>
-        <?= $app['grid']->render('listing-data'); ?>
+        <?= $app['grid']->listing->render('body'); ?>
     </tbody>
 </table>
 
