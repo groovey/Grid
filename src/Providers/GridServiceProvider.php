@@ -1,22 +1,27 @@
 <?php
 
-namespace Groovey\Grid;
+namespace Groovey\Grid\Providers;
 
-use Symfony\Component\Yaml\Yaml;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
+use Silex\Application;
+use Silex\Api\BootableProviderInterface;
+use Groovey\Grid\Grid;
 
-class Grid {
-
-    public function __construct()
+class GridServiceProvider implements ServiceProviderInterface, BootableProviderInterface
+{
+    public function register(Container $app)
     {
+        $app['grid'] = function ($app) {
 
+            $templates = $app['grid.templates'];
+            $cache     = (isset($app['menu.cache'])) ? $app['menu.cache'] : '';
+
+            return new Grid($templates, $cache);
+        };
     }
 
-    public function load($config)
+    public function boot(Application $app)
     {
-        $yaml = Yaml::parse(file_get_contents($config));
-
-        print_r( $yaml);
-
     }
-
 }

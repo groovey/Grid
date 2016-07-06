@@ -12,7 +12,8 @@
         "symfony/yaml" : "~3.0",
         "twig/twig" : "~1.24",
         "groovey/helper" : "dev-master",
-        "groovey/form" : "dev-master"
+        "groovey/form" : "dev-master",
+        "groovey/orm" : "dev-master"
     },
     "autoload": {
         "psr-4": {

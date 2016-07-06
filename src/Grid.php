@@ -3,8 +3,10 @@
 namespace Groovey\Grid;
 
 use Symfony\Component\Yaml\Yaml;
+use Groovey\ORM\DB;
 
-class Grid {
+class Grid
+{
 
     private $twig;
     private $yaml;
@@ -29,42 +31,65 @@ class Grid {
         $twig = $this->twig;
         $yaml = $this->yaml;
 
-        $html = '';
+        $datas = [];
         foreach ($yaml['listing'] as $value) {
-            $header = $value['header'];
 
-            extract($header);
+            extract($value['header']);
 
-            $html .= $twig->render('listing/header.html', [
-                        'label'   => coalesce($label),
-                        'width'   => coalesce($label),
-                    ]);
+            $datas[] = [
+                'label' => coalesce($label),
+                'width' => coalesce($width),
+            ];
         }
-        return $html;
+
+        return $twig->render('listing/header.html', [
+                                'datas' => $datas
+                            ]);
     }
 
-    public function renderListingData($datas)
+    public function renderListingBody()
     {
-        $twig = $this->twig;
-        $yaml = $this->yaml;
+        $twig    = $this->twig;
+        $yaml    = $this->yaml;
+        $results = DB::select($yaml['sql']);
 
-        $html = '';
-        // foreach ($yaml['data'] as $value) {
-        //     $data = $value['data'];
+        $datas = [];
+        foreach ($results as $result) {
 
-        //     extract($data);
+            $result = (array) $result;
 
-        //     $html .= $twig->render('listing/data.html', [
-        //                     'value' => coalesce($label),
-        //                 ]);
-        // }
-        return $html;
+            $cnt = 0;
+            foreach ($yaml['listing'] as $value) {
+
+                extract($value['body']);
+
+                $temp[$cnt++] = coalesce($result[$row]);
+            }
+
+            $datas[] = $temp;
+        }
+
+        return $twig->render('listing/body.html', [
+                                        'datas' => $datas,
+                                    ]);
 
     }
 
-    public function render()
+    public function render($type = '')
     {
+        $html = $this->html;
 
+        switch (strtolower($type)) {
+            case 'listing-header':
+                return $this->renderListingHeader();
+                break;
+
+            case 'listing-data':
+                return $this->renderListingBody();
+                break;
+            default:
+                break;
+        }
     }
 
 }
