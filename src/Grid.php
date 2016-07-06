@@ -12,6 +12,9 @@ class Grid
     private $yaml;
     private $html;
 
+    private $listing;
+
+
     public function __construct($templatesPath, $cachePath)
     {
         $cache  = ($cachePath) ? ['cache' => $cachePath] : [];
@@ -58,12 +61,16 @@ class Grid
 
             $result = (array) $result;
 
+
             $cnt = 0;
             foreach ($yaml['listing'] as $value) {
 
                 extract($value['body']);
 
-                $temp[$cnt++] = coalesce($result[$row]);
+                $temp[$cnt++] = [
+                            'row'   => coalesce($result[$row]),
+                            'align' => coalesce($align),
+                        ];
             }
 
             $datas[] = $temp;

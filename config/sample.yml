@@ -12,7 +12,7 @@ actions:
 
 sql:
 
-    SELECT * FROM users LIMIT 10
+    SELECT * FROM users LIMIT 1
 
 listing:
     -
@@ -23,6 +23,7 @@ listing:
 
         body:
             type: text
+            align: center
             row: id
     -
         header:
@@ -31,12 +32,14 @@ listing:
             width: 100
 
         body:
+            align: left
             row: name
 
     -
         header:
             label: Actions
         body:
+            align: center
             row: test
             type: add|edit|delete
 
