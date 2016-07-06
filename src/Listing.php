@@ -7,8 +7,8 @@ use Groovey\ORM\DB;
 
 class Listing
 {
-    public $twig;
-    public $yaml;
+    private $twig;
+    private $yaml;
 
     public function __construct($twig)
     {
@@ -36,7 +36,10 @@ class Listing
             if ($custom) {
                 $class  = element('class', $custom);
                 $action = element('action', $custom);
-                $label  = call_user_func([__NAMESPACE__.'\\'.$class, $action], []);
+                $label  = call_user_func(
+                                [__NAMESPACE__.'\\'.$class, $action],
+                                []
+                            );
             }
 
             $datas[] = [
@@ -62,11 +65,24 @@ class Listing
 
             $cnt = 0;
             foreach ($yaml['listing'] as $value) {
-                extract($value['body']);
+                $body   = $value['body'];
+                $custom = element('custom', $body);
+                $row    = element('row', $body);
+                $align  = element('align', $body);
+                $label  = coalesce($result[$row]);
+
+                if ($custom) {
+                    $class  = element('class', $custom);
+                    $action = element('action', $custom);
+                    $label  = call_user_func(
+                                    [__NAMESPACE__.'\\'.$class, $action],
+                                    $result
+                                );
+                }
 
                 $temp[$cnt++] = [
-                            'row'   => coalesce($result[$row]),
-                            'align' => coalesce($align),
+                            'row'   => $label,
+                            'align' => $align,
                         ];
             }
 

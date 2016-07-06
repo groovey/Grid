@@ -8,8 +8,10 @@ class Custom
     {
         return '<font color=red>Custom Header</font>';
     }
-    public function body()
+    public static function body($data)
     {
-        return '<font color=red>Custom Content | id = </font>';
+        $name = $data['name'];
+
+        return "<font color=blue>Custom Content | name = {$name}</font>";
     }
 }

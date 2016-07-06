@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Silex\Application;
 use Groovey\ORM\Providers\ORMServiceProvider;
@@ -23,14 +23,13 @@ $app->register(new ORMServiceProvider(), [
         ],
     ]);
 
-$app->register(new GridServiceProvider(),[
-        'grid.templates' => __DIR__. '/templates/grid',
-        // 'grid.cache'     => __DIR__. '/cache',
+$app->register(new GridServiceProvider(), [
+        'grid.templates' => __DIR__.'/../templates/grid',
+        'grid.cache'     => __DIR__.'/cache',
     ]);
 
-
 $app['db']->connection();
-$app['grid']->load('./config/sample.yml');
+$app['grid']->load('../config/sample.yml');
 
 ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">

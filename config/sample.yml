@@ -41,7 +41,7 @@ listing:
 
         body:
             custom: { class: custom, action: body}
-
+            align: left
 
     -
         header:
