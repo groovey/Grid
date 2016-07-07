@@ -49,7 +49,7 @@ listing:
 
         body:
             align: center
-            actions: [delete, edit]
+            actions: { delete: true, edit: true}
 
 
 

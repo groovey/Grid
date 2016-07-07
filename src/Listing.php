@@ -82,7 +82,7 @@ class Listing
                                     $result
                                 );
                 } elseif ($actions) {
-                    $label = $this->createActions($actions);
+                    $label = $this->renderActions($actions);
                 }
 
                 $temp[$cnt++] = [
@@ -99,9 +99,19 @@ class Listing
                                     ]);
     }
 
-    public function createActions($actions)
+    public function renderActions($actions)
     {
-        return 'todo';
+        $app = $this->app;
+
+        $delete = element( 'delete', $actions , false);
+        $edit   = element( 'edit', $actions , false);
+
+        $html = $app['twig']->render('listing/actions.html', [
+                                'delete' => $delete,
+                                'edit'   => $edit
+                            ]);
+
+        return $html;
     }
 
     public function render($type)
