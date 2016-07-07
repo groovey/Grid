@@ -13,11 +13,7 @@ class GridServiceProvider implements ServiceProviderInterface, BootableProviderI
     public function register(Container $app)
     {
         $app['grid'] = function ($app) {
-
-            $templates = $app['grid.templates'];
-            $cache     = (isset($app['menu.cache'])) ? $app['menu.cache'] : '';
-
-            return new Grid($templates, $cache);
+            return new Grid($app);
         };
     }
 

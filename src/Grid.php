@@ -2,20 +2,19 @@
 
 namespace Groovey\Grid;
 
+use Pimple\Container;
 use Symfony\Component\Yaml\Yaml;
 
 class Grid
 {
     public $listing;
     public $entry;
+    public $app;
 
-    public function __construct($templatesPath, $cachePath)
+    public function __construct(Container $app)
     {
-        $cache  = ($cachePath) ? ['cache' => $cachePath] : [];
-        $loader = new \Twig_Loader_Filesystem($templatesPath);
-        $twig   = new \Twig_Environment($loader, $cache);
-
-        $this->listing = new Listing($twig);
+        $this->app = $app;
+        $this->listing = new Listing($app);
     }
 
     public function load($config)

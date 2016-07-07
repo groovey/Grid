@@ -12,7 +12,7 @@ actions:
 
 sql:
 
-    SELECT * FROM users LIMIT 10
+    SELECT * FROM users LIMIT 1
 
 listing:
     -
@@ -49,8 +49,8 @@ listing:
 
         body:
             align: center
-            row: test
-            type: add|edit|delete
+            actions: [delete, edit]
+
 
 
 form:

@@ -2,17 +2,18 @@
 
 namespace Groovey\Grid;
 
+use Pimple\Container;
 use Symfony\Component\Yaml\Yaml;
 use Groovey\ORM\DB;
 
 class Listing
 {
-    private $twig;
+    private $app;
     private $yaml;
 
-    public function __construct($twig)
+    public function __construct(Container $app)
     {
-        $this->twig = $twig;
+        $this->app = $app;
     }
 
     public function setYaml($yaml)
@@ -22,7 +23,7 @@ class Listing
 
     public function header()
     {
-        $twig = $this->twig;
+        $app  = $this->app;
         $yaml = $this->yaml;
 
         $datas = [];
@@ -48,14 +49,14 @@ class Listing
             ];
         }
 
-        return $twig->render('listing/header.html', [
+        return $app['twig']->render('listing/header.html', [
                                 'datas' => $datas,
                             ]);
     }
 
     public function body()
     {
-        $twig    = $this->twig;
+        $app     = $this->app;
         $yaml    = $this->yaml;
         $results = DB::select($yaml['sql']);
 
@@ -65,10 +66,12 @@ class Listing
 
             $cnt = 0;
             foreach ($yaml['listing'] as $value) {
-                $body   = $value['body'];
-                $custom = element('custom', $body);
-                $row    = element('row', $body);
-                $align  = element('align', $body);
+                $body    = $value['body'];
+                $custom  = element('custom', $body);
+                $row     = element('row', $body);
+                $align   = element('align', $body);
+                $actions = element('actions', $body);
+
                 $label  = coalesce($result[$row]);
 
                 if ($custom) {
@@ -78,6 +81,8 @@ class Listing
                                     [__NAMESPACE__.'\\'.$class, $action],
                                     $result
                                 );
+                } elseif ($actions) {
+                    $label = $this->createActions($actions);
                 }
 
                 $temp[$cnt++] = [
@@ -89,9 +94,14 @@ class Listing
             $datas[] = $temp;
         }
 
-        return $twig->render('listing/body.html', [
+        return $app['twig']->render('listing/body.html', [
                                         'datas' => $datas,
                                     ]);
+    }
+
+    public function createActions($actions)
+    {
+        return 'todo';
     }
 
     public function render($type)
