@@ -1,18 +1,19 @@
-search:
-
-    1
-filter:
-
-    2
-
-actions:
-
-
-
+settings:
+    namespace: \Groovey\Grid
 
 sql:
+    search : [name]
+    query: SELECT * FROM users LIMIT 10
 
-    SELECT * FROM users LIMIT 5
+filters:
+    -
+        type: select
+        attributes:
+            name: status
+            options: { '': 'Select Status', active: Active, inactive: Inactive}
+            selected: active
+    -
+        custom: { class: custom, action: filter }
 
 listing:
     -
@@ -37,7 +38,7 @@ listing:
 
     -
         header:
-            custom: { class: custom, action: header}
+            custom: { class: custom, action: header }
 
         body:
             custom: { class: custom, action: body}
@@ -49,6 +50,6 @@ listing:
 
         body:
             align: center
-            actions: { delete: true, edit: true}
+            actions: { delete: true, edit: true }
 
 form:

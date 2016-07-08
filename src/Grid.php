@@ -7,14 +7,16 @@ use Symfony\Component\Yaml\Yaml;
 
 class Grid
 {
+    public $app;
     public $listing;
     public $entry;
-    public $app;
+    public $filter;
 
     public function __construct(Container $app)
     {
         $this->app = $app;
         $this->listing = new Listing($app);
+        $this->filter = new Filter($app);
     }
 
     public function load($config)
@@ -22,5 +24,6 @@ class Grid
         $yaml = Yaml::parse(file_get_contents($config));
 
         $this->listing->setYaml($yaml);
+        $this->filter->setYaml($yaml);
     }
 }

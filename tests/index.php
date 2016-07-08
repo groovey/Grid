@@ -14,7 +14,7 @@ $app['debug'] = true;
 $app->register(new GridServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new TwigServiceProvider(), [
-        'twig.path' => __DIR__.'/../templates'
+        'twig.path' => __DIR__.'/../templates',
     ]);
 
 $app->register(new ORMServiceProvider(), [
@@ -33,6 +33,8 @@ $app->register(new ORMServiceProvider(), [
 
 $app['db']->connection();
 $app['grid']->load('../config/sample.yml');
+
+echo $app['grid']->filter->render();
 
 ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">

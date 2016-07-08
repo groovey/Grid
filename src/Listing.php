@@ -8,8 +8,8 @@ use Groovey\ORM\DB;
 
 class Listing
 {
-    private $app;
-    private $yaml;
+    public $app;
+    public $yaml;
 
     public function __construct(Container $app)
     {
@@ -58,7 +58,7 @@ class Listing
     {
         $app     = $this->app;
         $yaml    = $this->yaml;
-        $results = DB::select($yaml['sql']);
+        $results = DB::select($yaml['sql']['query']);
 
         $datas = [];
         foreach ($results as $result) {
