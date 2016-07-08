@@ -14,10 +14,8 @@ $app['debug'] = true;
 $app->register(new GridServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new TwigServiceProvider(), [
-    'twig.path' => [
-            __DIR__.'/../templates/grid',
-        ],
-]);
+        'twig.path' => __DIR__.'/../templates'
+    ]);
 
 $app->register(new ORMServiceProvider(), [
         'db.connection' => [
@@ -45,4 +43,5 @@ $app['grid']->load('../config/sample.yml');
         <?= $app['grid']->listing->render('body'); ?>
     </tbody>
 </table>
+
 

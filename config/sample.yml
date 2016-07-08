@@ -12,7 +12,7 @@ actions:
 
 sql:
 
-    SELECT * FROM users LIMIT 10
+    SELECT * FROM users LIMIT 5
 
 listing:
     -
@@ -50,7 +50,5 @@ listing:
         body:
             align: center
             actions: { delete: true, edit: true}
-
-
 
 form:

@@ -49,7 +49,7 @@ class Listing
             ];
         }
 
-        return $app['twig']->render('listing/header.html', [
+        return $app['twig']->render('grid/listing/header.html', [
                                 'datas' => $datas,
                             ]);
     }
@@ -94,7 +94,7 @@ class Listing
             $datas[] = $temp;
         }
 
-        return $app['twig']->render('listing/body.html', [
+        return $app['twig']->render('grid/listing/body.html', [
                                         'datas' => $datas,
                                     ]);
     }
@@ -103,12 +103,12 @@ class Listing
     {
         $app = $this->app;
 
-        $delete = element( 'delete', $actions , false);
-        $edit   = element( 'edit', $actions , false);
+        $delete = element('delete', $actions, false);
+        $edit   = element('edit', $actions, false);
 
-        $html = $app['twig']->render('listing/actions.html', [
+        $html = $app['twig']->render('grid/listing/actions.html', [
                                 'delete' => $delete,
-                                'edit'   => $edit
+                                'edit'   => $edit,
                             ]);
 
         return $html;
