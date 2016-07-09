@@ -4,21 +4,23 @@ namespace Groovey\Grid;
 
 use Pimple\Container;
 use Symfony\Component\Yaml\Yaml;
-use Groovey\ORM\DB;
 
 class Listing
 {
     public $app;
     public $yaml;
+    public $query;
 
     public function __construct(Container $app)
     {
         $this->app = $app;
+        $this->query = new Query($app);
     }
 
     public function setYaml($yaml)
     {
         $this->yaml = $yaml;
+        $this->query->setYaml($yaml);
     }
 
     public function header()
@@ -58,7 +60,9 @@ class Listing
     {
         $app     = $this->app;
         $yaml    = $this->yaml;
-        $results = DB::select($yaml['sql']['query']);
+        $query   = $this->query;
+
+        $results = $query->results();
 
         $datas = [];
         foreach ($results as $result) {

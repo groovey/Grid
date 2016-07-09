@@ -11,12 +11,14 @@ class Grid
     public $listing;
     public $entry;
     public $filter;
+    public $paging;
 
     public function __construct(Container $app)
     {
-        $this->app = $app;
+        $this->app     = $app;
+        $this->paging  = $app['paging'];
         $this->listing = new Listing($app);
-        $this->filter = new Filter($app);
+        $this->filter  = new Filter($app);
     }
 
     public function load($config)

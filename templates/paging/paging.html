@@ -1,0 +1,17 @@
+<li class="previous {{arrow.first}}" tabindex="0">
+    <a class="fa fa-angle-double-left">first</a>
+</li>
+<li class="previous {{arrow.previous}}" tabindex="0">
+    <a class="fa fa-angle-left">previous</a>
+</li>
+
+{% for key, status in navigator %}
+<li class="{{status}}" tabindex="0"><a href="#">{{key}}</a></li>
+{% endfor%}
+
+<li class="next {{arrow.next}}" tabindex="0">
+    <a class="fa fa-angle-right">next</a>
+</li>
+<li class="next {{arrow.last}}" tabindex="0">
+    <a class="fa fa-angle-double-right">last</a>
+</li>

@@ -1,9 +1,12 @@
-settings:
-    namespace: \Groovey\Grid
-
-sql:
-    search : [name]
-    query: SELECT * FROM users LIMIT 10
+query:
+    search: [name]
+    total: count(*)
+    select: '*'
+    from: users
+    where: 1
+    group: 1
+    order: asc
+    limit: 10
 
 filters:
     -
