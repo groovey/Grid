@@ -8,12 +8,27 @@ use Groovey\ORM\Providers\ORMServiceProvider;
 use Groovey\Grid\Providers\GridServiceProvider;
 use Groovey\Form\Providers\FormServiceProvider;
 use Groovey\Paging\Providers\PagingServiceProvider;
+use Groovey\Support\Providers\RequestServiceProvider;
+use Groovey\Config\Providers\ConfigServiceProvider;
 
-$app = new Application();
+class App extends Application
+{
+    use Groovey\Support\Traits\DebugTrait;
+}
+
+$app = new App();
+
 $app['debug'] = true;
 
-$app->register(new GridServiceProvider());
 $app->register(new FormServiceProvider());
+$app->register(new RequestServiceProvider());
+$app->register(new GridServiceProvider());
+
+$app->register(new ConfigServiceProvider(), [
+        'config.path'        => __DIR__.'/../config',
+        'config.environment' => 'localhost',
+    ]);
+
 $app->register(new TwigServiceProvider(), [
         'twig.path' => __DIR__.'/../templates',
     ]);
@@ -38,20 +53,16 @@ $app->register(new PagingServiceProvider(), [
     ]);
 
 // Testing
-$_POST['sort_field'] = 'u.name';
-$_POST['sort_order'] = 'asc';
+// $_POST['q'] = 'man';
+// $_POST['sort_field'] = 'name';
+// $_POST['sort_order'] = 'desc';
 $_POST['filter_status'] = 'active';
 
-// $app['paging']->limit(10);
-// $app['paging']->process(1, 100);
 
-// $offset = $app['paging']->offset();
-// $limit  = $app['paging']->limit();
-
-// echo $app['paging']->render();
+$app['config']->set('app.debug' , true);
 
 $app['db']->connection();
-$app['grid']->load('../config/sample.yml');
+$app['grid']->load('../resources/yaml/sample.yml');
 
 echo $app['grid']->filter->render();
 
@@ -66,5 +77,3 @@ echo $app['grid']->filter->render();
 </table>
 
 <?= $app['grid']->paging->render(); ?>
-
-

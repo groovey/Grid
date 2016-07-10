@@ -11,10 +11,12 @@
         "silex/silex" : "~2.0",
         "symfony/yaml" : "~3.0",
         "twig/twig" : "~1.24",
-        "groovey/orm" : "dev-master",
-        "groovey/paging" : "dev-master",
         "groovey/helper" : "dev-master",
-        "groovey/form" : "dev-master"
+        "groovey/support" : "dev-master",
+        "groovey/config" : "dev-master",
+        "groovey/form" : "dev-master",
+        "groovey/orm" : "dev-master",
+        "groovey/paging" : "dev-master"
     },
     "autoload": {
         "psr-4": {

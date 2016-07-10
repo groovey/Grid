@@ -1,11 +1,11 @@
-query:
+sql:
     search: [name]
     total: count(*)
     select: '*'
     from: users
-    where: 1
-    group: 1
-    order: asc
+    where:
+    group:
+    order:
     limit: 10
 
 filters:
