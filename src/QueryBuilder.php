@@ -35,7 +35,11 @@ class QueryBuilder
         $q      = $app['request']->get('q');
 
         if (!$q || !$search) {
-            return;
+            return '';
+        }
+
+        if (!$app['request']->isMethod('POST')) {
+            return '';
         }
 
         $temp = [];
@@ -46,17 +50,47 @@ class QueryBuilder
         return implode(' AND ', $temp);
     }
 
+    public function composeFilter()
+    {
+        $app     = $this->app;
+        $filters = $this->yaml['filters'];
+        $cond    = [];
+
+        if (!$app['request']->isMethod('POST')) {
+            return '';
+        }
+
+        foreach ($filters as $filter) {
+            $type       = element('type', $filter);
+            $custom     = element('custom', $filter);
+            $operation  = element('operation', $filter);
+            $attributes = element('attributes', $filter);
+
+            if ($custom) {
+                $class    = element('class', $custom);
+                $action   = element('action', $custom);
+                $response = call_user_func_array([$class, $action], [$app]);
+                $value    = $response['operation'];
+            } else {
+                $name   = element('name', $attributes);
+                $value  = $app['request']->get('filter_'.$name);
+                if ($value) {
+                    $cond[] = preg_replace('/{% post %}/', $value, $operation);
+                }
+            }
+        }
+
+        return implode(' AND ', array_filter($cond));
+    }
+
     public function composeWhere()
     {
         $sql    = $this->getSql();
         $where  = element('where', $sql, '1');
         $search = $this->composeSearch();
-
-        $query = $temp[] = $where;
-        if ($search) {
-            $temp[] = $search;
-            $query  = implode(' AND', $temp);
-        }
+        $filter = $this->composeFilter();
+        $cond   = array_filter([$where, $search, $filter]);
+        $query  = implode(' AND ', $cond);
 
         return $query;
     }
@@ -77,13 +111,13 @@ class QueryBuilder
     {
         $app       = $this->app;
         $sql       = $this->getSql();
+        $post      = $app['request']->isMethod('POST');
         $order     = element('order', $sql, '');
         $sortField = $app['request']->get('sort_field');
         $sortOrder = $app['request']->get('sort_order');
+        $query     = ($order) ? "ORDER BY $order" : '';
 
-        $query = ($order) ? "ORDER BY $order" : '';
-
-        if ($sortField && $sortOrder) {
+        if ($sortField && $sortOrder && $post) {
             $query = "ORDER BY $sortField $sortOrder";
         }
 

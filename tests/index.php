@@ -53,20 +53,23 @@ $app->register(new PagingServiceProvider(), [
     ]);
 
 // Testing
-// $_POST['q'] = 'man';
 // $_POST['sort_field'] = 'name';
-// $_POST['sort_order'] = 'desc';
-$_POST['filter_status'] = 'active';
+// $_POST['sort_order'] = 'asc';
+// $_POST['filter_status'] = 'a';
+// $_POST['filter_custom'] = '';
 
 
 $app['config']->set('app.debug' , true);
 
 $app['db']->connection();
-$app['grid']->load('../resources/yaml/sample.yml');
+$app['grid']->load('../resources/yaml/sample.yml', []);
 
-echo $app['grid']->filter->render();
+
 
 ?>
+
+<?= $app['form']->open(['method' => 'post']); ?>
+<?= $app['grid']->filter->render(); ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
         <?= $app['grid']->listing->render('header'); ?>
@@ -77,3 +80,6 @@ echo $app['grid']->filter->render();
 </table>
 
 <?= $app['grid']->paging->render(); ?>
+<?= $app['form']->text('q'); ?>
+<?= $app['form']->submit('Search'); ?>
+<?= $app['form']->close(); ?>

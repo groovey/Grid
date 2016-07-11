@@ -35,10 +35,7 @@ class Listing extends QueryBuilder
             if ($custom) {
                 $class  = element('class', $custom);
                 $action = element('action', $custom);
-                $label  = call_user_func(
-                                [__NAMESPACE__.'\\'.$class, $action],
-                                []
-                            );
+                $label  = call_user_func([$class, $action], $app);
             }
 
             $datas[] = [
@@ -56,29 +53,25 @@ class Listing extends QueryBuilder
     {
         $app     = $this->app;
         $yaml    = $this->yaml;
-        $results = $this->getRecords();
+        $records = $this->getRecords();
 
         $datas = [];
-        foreach ($results as $result) {
-            $result = (array) $result;
+        foreach ($records as $record) {
+            $record = (array) $record;
+            $cnt    = 0;
 
-            $cnt = 0;
             foreach ($yaml['listing'] as $value) {
                 $body    = $value['body'];
                 $custom  = element('custom', $body);
                 $row     = element('row', $body);
                 $align   = element('align', $body);
                 $actions = element('actions', $body);
-
-                $label  = coalesce($result[$row]);
+                $label   = coalesce($record[$row]);
 
                 if ($custom) {
                     $class  = element('class', $custom);
                     $action = element('action', $custom);
-                    $label  = call_user_func(
-                                    [__NAMESPACE__.'\\'.$class, $action],
-                                    $result
-                                );
+                    $label  = call_user_func_array([$class, $action], [$app, $record]);
                 } elseif ($actions) {
                     $label = $this->renderActions($actions);
                 }

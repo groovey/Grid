@@ -11,12 +11,13 @@ sql:
 filters:
     -
         type: select
+        operation: name = '{% post %}'
         attributes:
-            name: status
-            options: { '': 'Select Status', active: Active, inactive: Inactive}
-            selected: active
+            name: filter_status
+            options: { '': 'Select Status', active: Active, inactive: Inactive }
+            selected: %test%
     -
-        custom: { class: custom, action: filter }
+        custom: { class: 'Groovey\Grid\Custom', action: filter }
 
 listing:
     -
@@ -24,7 +25,6 @@ listing:
             label: Id
             sort: s.id
             width: 40
-
         body:
             type: text
             align: center
@@ -34,23 +34,18 @@ listing:
             label: Name
             sort: s.name
             width: 100
-
         body:
             align: left
             row: name
-
     -
         header:
-            custom: { class: custom, action: header }
-
+            custom: { class: 'Groovey\Grid\Custom', action: header }
         body:
-            custom: { class: custom, action: body}
+            custom: { class: 'Groovey\Grid\Custom', action: body}
             align: left
-
     -
         header:
             label: Actions
-
         body:
             align: center
             actions: { delete: true, edit: true }

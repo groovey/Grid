@@ -37,13 +37,11 @@ class Filter extends Html
             $attributes = element('attributes', $filter);
 
             if ($custom) {
-                $class  = element('class', $custom);
-                $action = element('action', $custom);
+                $class    = element('class', $custom);
+                $action   = element('action', $custom);
+                $response = call_user_func_array([$class, $action], [$app]);
 
-                $html .= call_user_func(
-                                [__NAMESPACE__.'\\'.$class, $action],
-                                []
-                            );
+                $html .= coalesce($response['html']);
             } else {
                 $name = element('name', $attributes);
                 if ($name) {

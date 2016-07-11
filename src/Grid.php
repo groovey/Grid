@@ -4,6 +4,7 @@ namespace Groovey\Grid;
 
 use Pimple\Container;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 class Grid
 {
@@ -21,9 +22,15 @@ class Grid
         $this->filter  = new Filter($app);
     }
 
-    public function load($config)
+    public function load($file)
     {
-        $yaml = Yaml::parse(file_get_contents($config));
+        $app = $this->app;
+
+        try {
+            $yaml = Yaml::parse(file_get_contents($file));
+        } catch (ParseException $e) {
+            // $app->debug("Unable to parse the YAML string: %s");
+        }
 
         $this->listing->setYaml($yaml);
         $this->filter->setYaml($yaml);
