@@ -65,10 +65,9 @@ $header = $app['grid']->listing->render('header');
 $body   = $app['grid']->listing->render('body');
 $paging = $app['grid']->paging->render();
 
-
 // View
 ?>
-<?= $app['form']->open(['method' => 'post']); ?>
+<?= $app['form']->open(['method' => 'get']); ?>
 <?= $filter; ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
@@ -83,22 +82,22 @@ $paging = $app['grid']->paging->render();
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
         <tr>
-            <th>Post Parameters</th>
+            <th>TODO Post Parameters</th>
             <th>Post Data</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>Page</td>
-            <td><?= $app['form']->text('page', 1); ?></td>
+            <td><?= $app['form']->text('p', 1); ?></td>
         </tr>
         <tr>
             <td>Sort Field</td>
-            <td><?= $app['form']->text('sort_field', 'name'); ?></td>
+            <td><?= $app['form']->text('sf', 'name'); ?></td>
         </tr>
         <tr>
             <td>Sort Data</td>
-            <td><?= $app['form']->text('sort_order', 'asc'); ?></td>
+            <td><?= $app['form']->text('so', 'asc'); ?></td>
         </tr>
         <tr>
             <td>Q</td>
@@ -110,4 +109,5 @@ $paging = $app['grid']->paging->render();
         </tr>
     </tbody>
 </table>
+
 <?= $app['form']->close(); ?>

@@ -38,7 +38,7 @@ class QueryBuilder
             return '';
         }
 
-        if (!$app['request']->isMethod('POST')) {
+        if (!$app['request']->isMethod('GET')) {
             return '';
         }
 
@@ -56,7 +56,7 @@ class QueryBuilder
         $filters = $this->yaml['filters'];
         $cond    = [];
 
-        if (!$app['request']->isMethod('POST')) {
+        if (!$app['request']->isMethod('GET')) {
             return '';
         }
 
@@ -76,7 +76,7 @@ class QueryBuilder
                 $value  = $app['request']->get($name);
 
                 if ($value) {
-                    $cond[] = preg_replace('/{% post %}/', $value, $operation);
+                    $cond[] = preg_replace('/{% get %}/', $value, $operation);
                 }
             }
         }
@@ -102,7 +102,7 @@ class QueryBuilder
         $group = element('group', $sql);
 
         if (!$group) {
-            return;
+            return '';
         }
 
         return "GROUP BY $group";
@@ -113,12 +113,12 @@ class QueryBuilder
         $app       = $this->app;
         $sql       = $this->getSql();
         $order     = element('order', $sql, '');
-        $post      = $app['request']->isMethod('POST');
-        $sortField = $app['request']->get('sort_field');
-        $sortOrder = $app['request']->get('sort_order');
+        $get       = $app['request']->isMethod('GET');
+        $sortField = $app['request']->get('sf');
+        $sortOrder = $app['request']->get('so');
         $query     = ($order) ? "ORDER BY $order" : '';
 
-        if ($sortField && $sortOrder && $post) {
+        if ($sortField && $sortOrder && $get) {
             $query = "ORDER BY $sortField $sortOrder";
         }
 
@@ -151,7 +151,7 @@ class QueryBuilder
     public function getRecords()
     {
         $app          = $this->app;
-        $page         = $app['request']->get('page', 1);
+        $page         = $app['request']->get('p', 1);
         $sql          = $this->getSql();
         $select       = element('select', $sql);
         $from         = element('from', $sql);

@@ -1,8 +1,8 @@
 sql:
     search: [name]
     total: count(*)
-    select: '*'
-    from: users
+    select: 'u.*'
+    from: users AS u
     where:
     group:
     order:
@@ -11,10 +11,10 @@ sql:
 filters:
     -
         type: select
-        operation: name = '{% post %}'
+        operation: u.status = '{% get %}'
         attributes:
             name: filter_status
-            options: { '': 'Select Status', active: Active, inactive: Inactive }
+            options: { '': 'Select Status', ACTIVE: Active, INACTIVE: Inactive }
             selected: {{ filter_status }}
     -
         custom: { class: 'Groovey\Grid\Custom', action: filter }
@@ -29,6 +29,15 @@ listing:
             type: text
             align: center
             row: id
+    -
+        header:
+            label: Status
+            sort: u.status
+            width: 40
+        body:
+            type: text
+            align: center
+            row: status
     -
         header:
             label: Name
