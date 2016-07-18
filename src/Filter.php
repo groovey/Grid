@@ -43,11 +43,6 @@ class Filter extends Html
 
                 $html .= coalesce($response['html']);
             } else {
-                $name = element('name', $attributes);
-                if ($name) {
-                    $attributes['name'] = 'filter_'.$name;
-                }
-
                 $html .= $this->$type($attributes);
             }
         }

@@ -49,7 +49,7 @@ class Listing extends QueryBuilder
                             ]);
     }
 
-    public function body()
+    public function body($msg = 'No Matching Records Found')
     {
         $app     = $this->app;
         $yaml    = $this->yaml;
@@ -87,6 +87,7 @@ class Listing extends QueryBuilder
 
         return $app['twig']->render('grid/listing/body.html', [
                                         'datas' => $datas,
+                                        'msg' => $msg,
                                     ]);
     }
 

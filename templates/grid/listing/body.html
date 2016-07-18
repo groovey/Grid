@@ -1,3 +1,5 @@
+{% if datas|length > 0 %}
+
 {% for data in datas %}
 <tr>
     {%for value in data %}
@@ -5,3 +7,9 @@
     {% endfor%}
 </tr>
 {% endfor%}
+
+{% else %}
+<tr>
+	<td colspan='100%' align="center">{{ msg }}</td>
+</tr>
+{% endif %}

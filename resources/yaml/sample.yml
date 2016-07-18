@@ -15,7 +15,7 @@ filters:
         attributes:
             name: filter_status
             options: { '': 'Select Status', active: Active, inactive: Inactive }
-            selected: %test%
+            selected: {{ filter_status }}
     -
         custom: { class: 'Groovey\Grid\Custom', action: filter }
 

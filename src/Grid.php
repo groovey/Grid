@@ -22,17 +22,28 @@ class Grid
         $this->filter  = new Filter($app);
     }
 
-    public function load($file)
+    public function load($file, array $datas = [])
     {
-        $app = $this->app;
+        $app      = $this->app;
+        $contents = file_get_contents($file);
+        $contents = $this->replace($contents, $datas);
 
         try {
-            $yaml = Yaml::parse(file_get_contents($file));
+            $yaml = Yaml::parse($contents);
         } catch (ParseException $e) {
-            // $app->debug("Unable to parse the YAML string: %s");
+            $app->debug('Unable to parse the YAML string: %s');
         }
 
         $this->listing->setYaml($yaml);
         $this->filter->setYaml($yaml);
+    }
+
+    public function replace($contents, $datas)
+    {
+        foreach ($datas as $key => $value) {
+            $contents = str_replace("{{ $key }}", $value, $contents);
+        }
+
+        return $contents;
     }
 }

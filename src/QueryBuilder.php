@@ -73,7 +73,8 @@ class QueryBuilder
                 $value    = $response['operation'];
             } else {
                 $name   = element('name', $attributes);
-                $value  = $app['request']->get('filter_'.$name);
+                $value  = $app['request']->get($name);
+
                 if ($value) {
                     $cond[] = preg_replace('/{% post %}/', $value, $operation);
                 }
@@ -111,8 +112,8 @@ class QueryBuilder
     {
         $app       = $this->app;
         $sql       = $this->getSql();
-        $post      = $app['request']->isMethod('POST');
         $order     = element('order', $sql, '');
+        $post      = $app['request']->isMethod('POST');
         $sortField = $app['request']->get('sort_field');
         $sortOrder = $app['request']->get('sort_order');
         $query     = ($order) ? "ORDER BY $order" : '';
@@ -150,17 +151,18 @@ class QueryBuilder
     public function getRecords()
     {
         $app          = $this->app;
+        $page         = $app['request']->get('page', 1);
         $sql          = $this->getSql();
-        $totalRecords = (int) $this->getTotalRecords();
         $select       = element('select', $sql);
         $from         = element('from', $sql);
         $limit        = element('limit', $sql);
+        $totalRecords = $this->getTotalRecords();
         $where        = $this->composeWhere();
         $group        = $this->composeGroup();
         $order        = $this->composeOrder();
 
         $app['paging']->limit($limit);
-        $app['paging']->process(1, $totalRecords);
+        $app['paging']->process($page, $totalRecords);
 
         $offset = $app['paging']->offset();
         $limit  = $app['paging']->limit();
@@ -168,6 +170,7 @@ class QueryBuilder
         $query = "SELECT $select FROM $from WHERE $where $group $order LIMIT $offset, $limit";
 
         $app->debug('getRecords = '.$query);
+        $app->debug('total = '.$totalRecords);
 
         return DB::select($query);
     }

@@ -48,38 +48,66 @@ $app->register(new ORMServiceProvider(), [
     ]);
 
 $app->register(new PagingServiceProvider(), [
-        'paging.limit' => 10,
+        'paging.limit'      => 10,
         'paging.navigation' => 7,
     ]);
 
-// Testing
-// $_POST['sort_field'] = 'name';
-// $_POST['sort_order'] = 'asc';
-// $_POST['filter_status'] = 'a';
-// $_POST['filter_custom'] = '';
+// Controller
 
+$datas = ['filter_status' => $app['request']->get('filter_status', '')];
 
-$app['config']->set('app.debug' , true);
-
+$app['config']->set('app.debug', true);
 $app['db']->connection();
-$app['grid']->load('../resources/yaml/sample.yml', []);
+$app['grid']->load('../resources/yaml/sample.yml', $datas);
+
+$filter = $app['grid']->filter->render();
+$header = $app['grid']->listing->render('header');
+$body   = $app['grid']->listing->render('body');
+$paging = $app['grid']->paging->render();
 
 
-
+// View
 ?>
-
 <?= $app['form']->open(['method' => 'post']); ?>
-<?= $app['grid']->filter->render(); ?>
+<?= $filter; ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
-        <?= $app['grid']->listing->render('header'); ?>
+        <?= $header; ?>
     </thead>
     <tbody>
-        <?= $app['grid']->listing->render('body'); ?>
+        <?= $body; ?>
     </tbody>
 </table>
+<?= $paging; ?>
 
-<?= $app['grid']->paging->render(); ?>
-<?= $app['form']->text('q'); ?>
-<?= $app['form']->submit('Search'); ?>
+<table class="" border="1" cellspacing="6" cellspacing="1">
+    <thead>
+        <tr>
+            <th>Post Parameters</th>
+            <th>Post Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Page</td>
+            <td><?= $app['form']->text('page', 1); ?></td>
+        </tr>
+        <tr>
+            <td>Sort Field</td>
+            <td><?= $app['form']->text('sort_field', 'name'); ?></td>
+        </tr>
+        <tr>
+            <td>Sort Data</td>
+            <td><?= $app['form']->text('sort_order', 'asc'); ?></td>
+        </tr>
+        <tr>
+            <td>Q</td>
+            <td><?= $app['form']->text('q'); ?></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><?= $app['form']->submit('Search'); ?></td>
+        </tr>
+    </tbody>
+</table>
 <?= $app['form']->close(); ?>
