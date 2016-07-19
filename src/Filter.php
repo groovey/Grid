@@ -20,7 +20,7 @@ class Filter extends Html
         $this->yaml = $yaml;
     }
 
-    public function render()
+    public function render($hidden = true)
     {
         $app     = $this->app;
         $yaml    = $this->yaml;
@@ -47,6 +47,21 @@ class Filter extends Html
             }
         }
 
-        return $html;
+        return $html.$this->renderHidden($hidden);
+    }
+
+    public function renderHidden($hidden)
+    {
+        $app = $this->app;
+
+        if ($hidden) {
+            $sort_field = $app['form']->hidden('sf', '');
+            $sort_order = $app['form']->hidden('so', 'asc');
+        } else {
+            $sort_field = $app['form']->text('sf', '');
+            $sort_order = $app['form']->text('so', 'asc');
+        }
+
+        return $sort_field.$sort_order;
     }
 }

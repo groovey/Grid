@@ -92,14 +92,6 @@ $paging = $app['grid']->paging->render();
             <td><?= $app['form']->text('p', 1); ?></td>
         </tr>
         <tr>
-            <td>Sort Field</td>
-            <td><?= $app['form']->text('sf', 'name'); ?></td>
-        </tr>
-        <tr>
-            <td>Sort Data</td>
-            <td><?= $app['form']->text('so', 'asc'); ?></td>
-        </tr>
-        <tr>
             <td>Q</td>
             <td><?= $app['form']->text('q'); ?></td>
         </tr>
