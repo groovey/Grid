@@ -50,18 +50,25 @@ class Filter extends Html
         return $html.$this->renderHidden($hidden);
     }
 
-    public function renderHidden($hidden)
+    public function renderHidden($hidden = true)
     {
         $app = $this->app;
 
+        $html = '';
+        $page = $app['request']->get('p', 1);
+        $sortField = $app['request']->get('sf', '');
+        $sortOrder = $app['request']->get('so', 'asc');
+
         if ($hidden) {
-            $sort_field = $app['form']->hidden('sf', '');
-            $sort_order = $app['form']->hidden('so', 'asc');
+            $html .= $app['form']->hidden('sf', $sortField);
+            $html .= $app['form']->hidden('so', $sortOrder);
+            $html .= $app['form']->hidden('p', $page);
         } else {
-            $sort_field = $app['form']->text('sf', '');
-            $sort_order = $app['form']->text('so', 'asc');
+            $html .= $app['form']->text('sf', $sortField);
+            $html .= $app['form']->text('so', $sortOrder);
+            $html .= $app['form']->text('p', $page);
         }
 
-        return $sort_field.$sort_order;
+        return $html;
     }
 }

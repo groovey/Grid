@@ -1,3 +1,4 @@
+{% if totalRecords > 0 %}
 <li class="previous {{arrow.first}}" tabindex="0">
     <a class="fa fa-angle-double-left">first</a>
 </li>
@@ -15,3 +16,4 @@
 <li class="next {{arrow.last}}" tabindex="0">
     <a class="fa fa-angle-double-right">last</a>
 </li>
+{% endif %}

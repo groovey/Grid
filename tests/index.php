@@ -60,7 +60,7 @@ $app['config']->set('app.debug', true);
 $app['db']->connection();
 $app['grid']->load('../resources/yaml/sample.yml', $datas);
 
-$filter = $app['grid']->filter->render();
+$filter = $app['grid']->filter->render($hidden = false);
 $header = $app['grid']->listing->render('header');
 $body   = $app['grid']->listing->render('body');
 $paging = $app['grid']->paging->render();
@@ -82,18 +82,14 @@ $paging = $app['grid']->paging->render();
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
         <tr>
-            <th>TODO Post Parameters</th>
-            <th>Post Data</th>
+            <th>Parameters</th>
+            <th>Data</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Page</td>
-            <td><?= $app['form']->text('p', 1); ?></td>
-        </tr>
-        <tr>
             <td>Q</td>
-            <td><?= $app['form']->text('q'); ?></td>
+            <td><?= $app['form']->text('q', $app['request']->get('q', '')); ?></td>
         </tr>
         <tr>
             <td></td>
