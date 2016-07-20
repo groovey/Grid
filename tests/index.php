@@ -58,7 +58,7 @@ $datas = ['filter_status' => $app['request']->get('filter_status', '')];
 
 $app['config']->set('app.debug', true);
 $app['db']->connection();
-$app['grid']->load('../resources/yaml/sample.yml', $datas);
+$app['grid']->load('../resources/yaml/users.yml', $datas);
 
 $filter = $app['grid']->filter->render($hidden = false);
 $header = $app['grid']->listing->render('header');
