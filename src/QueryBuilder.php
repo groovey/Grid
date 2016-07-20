@@ -2,8 +2,6 @@
 
 namespace Groovey\Grid;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Yaml\Yaml;
 use Groovey\ORM\DB;
 
 class QueryBuilder

@@ -64,6 +64,7 @@ $filter = $app['grid']->filter->render($hidden = false);
 $header = $app['grid']->listing->render('header');
 $body   = $app['grid']->listing->render('body');
 $paging = $app['grid']->paging->render();
+$entry  = $app['grid']->entry->render();
 
 // View
 ?>
@@ -97,5 +98,7 @@ $paging = $app['grid']->paging->render();
         </tr>
     </tbody>
 </table>
+
+<?= $entry; ?>
 
 <?= $app['form']->close(); ?>

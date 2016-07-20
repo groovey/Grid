@@ -20,13 +20,13 @@ class Grid
         $this->paging  = $app['paging'];
         $this->listing = new Listing($app);
         $this->filter  = new Filter($app);
+        $this->entry   = new Entry($app);
     }
 
     public function load($file, array $datas = [])
     {
         $app      = $this->app;
-        $contents = file_get_contents($file);
-        $contents = $this->replace($contents, $datas);
+        $contents = $this->replace(file_get_contents($file), $datas);
 
         try {
             $yaml = Yaml::parse($contents);
@@ -36,6 +36,7 @@ class Grid
 
         $this->listing->setYaml($yaml);
         $this->filter->setYaml($yaml);
+        $this->entry->setYaml($yaml);
     }
 
     public function replace($contents, $datas)

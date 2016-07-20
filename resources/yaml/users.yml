@@ -59,4 +59,25 @@ listing:
             align: center
             actions: { delete: true, edit: true }
 
-form:
+entry:
+    -
+        type: text
+        label: Name
+        required: true
+        help: A block of help text that breaks onto a new line and may extend beyond one line.
+        attributes:
+            name: name
+            id: name
+            value: sample
+            maxlength: 20
+
+    # -
+    #     type: textarea
+    #     label: Description
+    #     required: true
+    #     attributes:
+    #         name: description
+    #         id: description
+    #         value:
+    #         counter: true
+    #         limit: 5000
