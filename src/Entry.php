@@ -30,27 +30,22 @@ class Entry extends FormBuilder
             $label      = element('label', $value);
             $required   = element('required', $value);
             $help       = element('help', $value);
+            $text       = element('text', $value);
             $attributes = element('attributes', $value);
 
             $misc = [
                     'type'     => $type,
                     'label'    => $label,
                     'required' => $required,
+                    'text'     => $text,
                     'help'     => $help,
                 ];
 
-            $form = $this->input($app, $misc, $attributes);
+            $form = $this->container($app, $misc, $attributes);
 
             $datas[] = $form;
-
-            // $datas[] = [
-            //     'type'     => $type,
-            //     'label'    => $label,
-            //     'required' => $required,
-            //     'form'     => $form
-            // ];
+            // dump( $datas);
         }
-        dump($datas);
 
         return $app['twig']->render('grid/entry/entry.html', [
                                 'datas' => $datas,

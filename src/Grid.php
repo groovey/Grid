@@ -31,7 +31,9 @@ class Grid
         try {
             $yaml = Yaml::parse($contents);
         } catch (ParseException $e) {
-            $app->debug('Unable to parse the YAML string: %s');
+            $app->debug('Unable to parse the YAML string:');
+            $app->debug($e);
+            die();
         }
 
         $this->listing->setYaml($yaml);
@@ -42,6 +44,7 @@ class Grid
     public function replace($contents, $datas)
     {
         foreach ($datas as $key => $value) {
+            $value    = Yaml::dump($value, 0);
             $contents = str_replace("{{ $key }}", $value, $contents);
         }
 

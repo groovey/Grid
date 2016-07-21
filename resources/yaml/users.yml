@@ -66,18 +66,42 @@ entry:
         required: true
         help: A block of help text that breaks onto a new line and may extend beyond one line.
         attributes:
-            name: name
-            id: name
+            name: text
+            id: text
             value: sample
             maxlength: 20
+    -
+        type: password
+        label: Password
+        required: true
+        help: A strong password contains letters and numbers
+        attributes:
+            name: password
+    -
+        type: placeholder
+        label: Placeholder
+        required: true
+        attributes:
+            name: placeholder
+            placeholder: placeholder
+    -
+        type: disabled
+        label: Disabled
+        required: true
+        attributes:
+            name: placeholder
+            placeholder: Disabled input here
+            disabled: disabled
+    -
+        type: static
+        label: Static
+        text: Some Static text
 
-    # -
-    #     type: textarea
-    #     label: Description
-    #     required: true
-    #     attributes:
-    #         name: description
-    #         id: description
-    #         value:
-    #         counter: true
-    #         limit: 5000
+    -
+        type: checkbox-inline
+        label: Checkbox Inline
+        required: true
+        attributes:
+            name: my_checkbox[]
+            options: { value1 : option 1, value2 : option 2 }
+            selected: [value1]

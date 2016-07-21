@@ -54,7 +54,9 @@ $app->register(new PagingServiceProvider(), [
 
 // Controller
 
-$datas = ['filter_status' => $app['request']->get('filter_status', '')];
+$datas = [
+    'filter_status'    => $app['request']->get('filter_status', ''),
+];
 
 $app['config']->set('app.debug', true);
 $app['db']->connection();
