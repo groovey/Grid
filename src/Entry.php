@@ -44,7 +44,6 @@ class Entry extends FormBuilder
             $form = $this->container($app, $misc, $attributes);
 
             $datas[] = $form;
-            // dump( $datas);
         }
 
         return $app['twig']->render('grid/entry/entry.html', [

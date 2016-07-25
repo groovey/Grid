@@ -1,0 +1,7 @@
+{% for radio in elements %}
+<div class="radio">
+    <label>
+        {{ radio.form|raw}} {{ radio.label}}
+    </label>
+</div>
+{% endfor %}

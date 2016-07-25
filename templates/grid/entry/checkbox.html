@@ -1,0 +1,7 @@
+{% for checkbox in elements %}
+<div class="checkbox">
+    <label>
+        {{ checkbox.form|raw}} {{ checkbox.label}}
+    </label>
+</div>
+{% endfor %}

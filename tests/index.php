@@ -55,7 +55,7 @@ $app->register(new PagingServiceProvider(), [
 // Controller
 
 $datas = [
-    'filter_status'    => $app['request']->get('filter_status', ''),
+    'filter_status'    => $app['request']->get('filter_status', 'INACTIVE'),
 ];
 
 $app['config']->set('app.debug', true);

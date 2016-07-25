@@ -1,0 +1,13 @@
+<div class="input-group m-b">
+
+    {% if prefix %}
+    <span class="input-group-addon">{{ prefix }}</span>
+    {% endif %}
+
+    {{ form|raw }}
+
+    {% if suffix %}
+    <span class="input-group-addon">{{ suffix }}</span>
+    {% endif %}
+
+</div>

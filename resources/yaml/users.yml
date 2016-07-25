@@ -96,12 +96,90 @@ entry:
         type: static
         label: Static
         text: Some Static text
-
     -
         type: checkbox-inline
         label: Checkbox Inline
         required: true
         attributes:
-            name: my_checkbox[]
+            name: checkbox_inline[]
             options: { value1 : option 1, value2 : option 2 }
             selected: [value1]
+    -
+        type: checkbox
+        label: Checkbox
+        required: true
+        attributes:
+            name: my_checkbox[]
+            options: { value1 : option 1, value2 : option 2, value3 : option 3 }
+            selected: [value2]
+    -
+        type: radio-inline
+        label: Radio Inline
+        required: true
+        attributes:
+            name: radio_inline[]
+            options: { value1 : option 1, value2 : option 2 }
+            selected: [value2]
+    -
+        type: radio
+        label: Radio
+        required: true
+        attributes:
+            name: my_radio[]
+            options: { value1 : option 1, value2 : option 2, value3: option 3 }
+            selected: [value3]
+    -
+        type: select
+        label: Select
+        required: true
+        attributes:
+            name: select
+            options: { '' : 'Select Status', active : Active, inactive: Inactive }
+            selected: active
+    -
+        type: select
+        label: Select Grouping
+        required: true
+        attributes:
+            name: select
+            options: { 'Cats' : { leopard: Leopard }, Dogs : { spaniel: Spaniel } }
+            selected: spaniel
+    -
+        type: select
+        label: Select Multiple
+        required: true
+        attributes:
+            name: select
+            options: { value1: option 1, value2: option 2, value3: option 3 }
+            selected: [value2, value3]
+            multiple: multiple
+
+    -
+        type: select-range
+        label: Select Range
+        required: true
+        attributes:
+            name: select_range
+            start: 10,
+            end: 20
+            selected: 15
+    -
+        type: select-month
+        label: Select Month
+        required: true
+        attributes:
+            name: select_month
+            selected: 11
+
+    -
+        type: input-group
+        label: Input Group
+        required: true
+        attributes:
+            prefix: $
+            suffix: '.00'
+            name: prefix_input_group
+            id: prefix_input_group
+            value: 360
+            maxlength: 20
+
