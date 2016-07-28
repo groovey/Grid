@@ -55,7 +55,7 @@ $app->register(new PagingServiceProvider(), [
 // Controller
 
 $datas = [
-    'filter_status'    => $app['request']->get('filter_status', 'INACTIVE'),
+    'filter_status' => $app['request']->get('filter_status', 'INACTIVE'),
 ];
 
 $app['config']->set('app.debug', true);
@@ -70,7 +70,7 @@ $entry  = $app['grid']->entry->render();
 
 // View
 ?>
-<?= $app['form']->open(['method' => 'get']); ?>
+<?= $app['form']->open(['method' => 'post']); ?>
 <?= $filter; ?>
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>

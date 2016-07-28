@@ -1,5 +1,5 @@
 sql:
-    search: [name]
+    search: [name, status]
     total: count(*)
     select: 'u.*'
     from: users AS u
@@ -11,7 +11,7 @@ sql:
 filters:
     -
         type: select
-        operation: u.status = '{% get %}'
+        operation: u.status = '{% post %}'
         attributes:
             name: filter_status
             options: { '': 'Select Status', ACTIVE: Active, INACTIVE: Inactive }
@@ -182,4 +182,3 @@ entry:
             id: prefix_input_group
             value: 360
             maxlength: 20
-
