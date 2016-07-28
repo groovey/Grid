@@ -52,21 +52,23 @@ class Filter extends Html
 
     public function renderHidden($hidden = true)
     {
-        $app = $this->app;
-
-        $html = '';
-        $page = $app['request']->get('p', 1);
-        $sortField = $app['request']->get('sf', '');
-        $sortOrder = $app['request']->get('so', 'asc');
+        $app       = $this->app;
+        $html      = '';
+        $action    = $app['request']->get('action', 'listing');
+        $page      = $app['request']->get('page', 1);
+        $sortField = $app['request']->get('sort_field', '');
+        $sortOrder = $app['request']->get('sort_order', 'asc');
 
         if ($hidden) {
-            $html .= $app['form']->hidden('sf', $sortField);
-            $html .= $app['form']->hidden('so', $sortOrder);
-            $html .= $app['form']->hidden('p', $page);
+            $html .= $app['form']->hidden('action', $action);
+            $html .= $app['form']->hidden('sort_field', $sortField);
+            $html .= $app['form']->hidden('sort_order', $sortOrder);
+            $html .= $app['form']->hidden('page', $page);
         } else {
-            $html .= $app['form']->text('sf', $sortField);
-            $html .= $app['form']->text('so', $sortOrder);
-            $html .= $app['form']->text('p', $page);
+            $html .= $app['form']->text('action', $action);
+            $html .= $app['form']->text('sort_field', $sortField);
+            $html .= $app['form']->text('sort_order', $sortOrder);
+            $html .= $app['form']->text('page', $page);
         }
 
         return $html;

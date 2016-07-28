@@ -101,7 +101,6 @@ class FormBuilder
 
                 break;
             default:
-                # code...
                 break;
         }
 
