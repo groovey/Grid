@@ -37,7 +37,7 @@ $app->register(new ORMServiceProvider(), [
         'db.connection' => [
             'host'      => 'localhost',
             'driver'    => 'mysql',
-            'database'  => 'test',
+            'database'  => 'test_grid',
             'username'  => 'root',
             'password'  => '',
             'charset'   => 'utf8',
