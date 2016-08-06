@@ -11,11 +11,12 @@
     "require": {
         "silex/silex" : "~2.0",
         "symfony/yaml" : "~3.0",
+        "symfony/filesystem" : "~3.0",
         "twig/twig" : "~1.24",
         "groovey/config" : "dev-master",
+        "groovey/db" : "dev-master",
         "groovey/form" : "dev-master",
         "groovey/migration" : "dev-master",
-        "groovey/orm" : "dev-master",
         "groovey/paging" : "dev-master",
         "groovey/seeder" : "dev-master",
         "groovey/support" : "dev-master"

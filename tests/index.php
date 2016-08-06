@@ -4,22 +4,18 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
-use Groovey\ORM\Providers\ORMServiceProvider;
-use Groovey\Grid\Providers\GridServiceProvider;
+use Groovey\Config\Providers\ConfigServiceProvider;
+use Groovey\DB\Providers\DBServiceProvider;
 use Groovey\Form\Providers\FormServiceProvider;
+use Groovey\Grid\Providers\GridServiceProvider;
 use Groovey\Paging\Providers\PagingServiceProvider;
 use Groovey\Support\Providers\RequestServiceProvider;
-use Groovey\Config\Providers\ConfigServiceProvider;
+use Groovey\Support\Providers\TraceServiceProvider;
 
-class App extends Application
-{
-    use Groovey\Support\Traits\DebugTrait;
-}
-
-$app = new App();
-
+$app = new Application();
 $app['debug'] = true;
 
+$app->register(new TraceServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new RequestServiceProvider());
 $app->register(new GridServiceProvider());
@@ -33,7 +29,7 @@ $app->register(new TwigServiceProvider(), [
         'twig.path' => __DIR__.'/../templates',
     ]);
 
-$app->register(new ORMServiceProvider(), [
+$app->register(new DBServiceProvider(), [
         'db.connection' => [
             'host'      => 'localhost',
             'driver'    => 'mysql',

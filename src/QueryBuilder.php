@@ -2,7 +2,7 @@
 
 namespace Groovey\Grid;
 
-use Groovey\ORM\DB;
+use Groovey\DB\DB;
 
 class QueryBuilder
 {
@@ -130,7 +130,7 @@ class QueryBuilder
 
         $query = "SELECT $total AS total FROM $from WHERE $where $group LIMIT 1 ";
 
-        $app->debug('getTotalRecords = '.$query);
+        $app['trace']->debug('getTotalRecords = '.$query);
 
         $result = DB::select($query);
 
@@ -158,8 +158,8 @@ class QueryBuilder
 
         $query = "SELECT $select FROM $from WHERE $where $group $order LIMIT $offset, $limit";
 
-        $app->debug('getRecords = '.$query);
-        $app->debug('total = '.$totalRecords);
+        $app['trace']->debug('getRecords = '.$query);
+        $app['trace']->debug('total = '.$totalRecords);
 
         return DB::select($query);
     }
