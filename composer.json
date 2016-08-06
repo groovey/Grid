@@ -1,9 +1,10 @@
 {
     "name": "groovey/grid",
     "description": "Groovey Grid Package",
+    "keywords": ["silex", "groovey"],
     "authors": [
         {
-            "name": "pokoot",
+            "name": "Harold Kim Cantil",
             "email": "pokoot@gmail.com"
         }
     ],
