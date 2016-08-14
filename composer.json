@@ -17,6 +17,7 @@
         "groovey/db" : "dev-master",
         "groovey/form" : "dev-master",
         "groovey/migration" : "dev-master",
+        "groovey/tester" : "dev-master",
         "groovey/paging" : "dev-master",
         "groovey/seeder" : "dev-master",
         "groovey/support" : "dev-master"
