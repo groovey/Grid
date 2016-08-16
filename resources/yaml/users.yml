@@ -21,6 +21,7 @@ filters:
 
 listing:
     -
+        permission: user.view
         header:
             label: Id
             sort: s.id

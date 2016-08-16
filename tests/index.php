@@ -4,6 +4,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
+use Groovey\ACL\Providers\ACLServiceProvider;
 use Groovey\Config\Providers\ConfigServiceProvider;
 use Groovey\DB\Providers\DBServiceProvider;
 use Groovey\Form\Providers\FormServiceProvider;
@@ -19,6 +20,10 @@ $app->register(new TraceServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new RequestServiceProvider());
 $app->register(new GridServiceProvider());
+
+$app->register(new ACLServiceProvider(), [
+        'acl.permissions' => __DIR__.'/../resources/yaml/permissions.yml',
+    ]);
 
 $app->register(new ConfigServiceProvider(), [
         'config.path'        => __DIR__.'/../config',
@@ -54,8 +59,9 @@ $datas = [
     'filter_status' => $app['request']->get('filter_status', 'INACTIVE'),
 ];
 
-$app['config']->set('app.debug', true);
 $app['db']->connection();
+$app['acl']->authorize($userId = 1);
+$app['config']->set('app.debug', true);
 $app['grid']->load('../resources/yaml/users.yml', $datas);
 
 $filter = $app['grid']->filter->render($hidden = false);

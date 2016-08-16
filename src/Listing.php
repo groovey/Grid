@@ -21,16 +21,23 @@ class Listing extends QueryBuilder
 
     public function header()
     {
-        $app  = $this->app;
-        $yaml = $this->yaml;
-
+        $app   = $this->app;
+        $yaml  = $this->yaml;
         $datas = [];
-        foreach ($yaml['listing'] as $value) {
-            $header = $value['header'];
 
-            $custom = element('custom', $header);
-            $label  = element('label', $header);
-            $width  = element('width', $header);
+        foreach ($yaml['listing'] as $value) {
+            $header     = $value['header'];
+            $permission = element('permission', $value);
+            $custom     = element('custom', $header);
+            $label      = element('label', $header);
+            $width      = element('width', $header);
+
+            if ($permission) {
+                $allow = $app['acl']->allow($permission);
+                if ($allow === false) {
+                    continue;
+                }
+            }
 
             if ($custom) {
                 $class  = element('class', $custom);
@@ -49,24 +56,32 @@ class Listing extends QueryBuilder
                             ]);
     }
 
-    public function body($message = 'No Matching Records Found')
+    public function body($message = 'No Matching Records Found.')
     {
         $app     = $this->app;
         $yaml    = $this->yaml;
         $records = $this->getRecords();
+        $datas   = [];
 
-        $datas = [];
         foreach ($records as $record) {
             $record = (array) $record;
             $cnt    = 0;
 
             foreach ($yaml['listing'] as $value) {
-                $body    = $value['body'];
-                $custom  = element('custom', $body);
-                $row     = element('row', $body);
-                $align   = element('align', $body);
-                $actions = element('actions', $body);
-                $label   = coalesce($record[$row]);
+                $body       = $value['body'];
+                $permission = element('permission', $value);
+                $custom     = element('custom', $body);
+                $row        = element('row', $body);
+                $align      = element('align', $body);
+                $actions    = element('actions', $body);
+                $label      = coalesce($record[$row]);
+
+                if ($permission) {
+                    $allow = $app['acl']->allow($permission);
+                    if ($allow === false) {
+                        continue;
+                    }
+                }
 
                 if ($custom) {
                     $class  = element('class', $custom);
@@ -93,8 +108,7 @@ class Listing extends QueryBuilder
 
     public function renderActions($actions)
     {
-        $app = $this->app;
-
+        $app    = $this->app;
         $delete = element('delete', $actions, false);
         $edit   = element('edit', $actions, false);
 

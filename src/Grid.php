@@ -32,7 +32,7 @@ class Grid
 
         if (!$exists) {
             $app['trace']->show(true);
-            $app['trace']->debug('File does not exist :' . $file);
+            $app['trace']->debug('File does not exist :'.$file);
             die();
         }
 
