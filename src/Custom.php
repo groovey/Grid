@@ -30,4 +30,19 @@ class Custom
 
         return ['html' => $html, 'operation' => $operation];
     }
+
+    public static function entry(Container $app, $param)
+    {
+        $label = $param['label'];
+        $help  = $param['help'];
+        $form  = '<input type="text" style="background-color:red" value="This is a custom message">';
+
+        $html  = $app['twig']->render('grid/entry/container.html', [
+                                'form'  => $form,
+                                'label' => $label,
+                                'help'  => $help,
+                            ]);
+
+        return $html;
+    }
 }

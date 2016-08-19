@@ -35,6 +35,11 @@ class Filter extends Html
             $type       = element('type', $filter);
             $custom     = element('custom', $filter);
             $attributes = element('attributes', $filter);
+            $permission = element('permission', $filter);
+
+            if ($permission && !$app['acl']->allow($permission)) {
+                continue;
+            }
 
             if ($custom) {
                 $class    = element('class', $custom);

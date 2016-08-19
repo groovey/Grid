@@ -6,7 +6,7 @@ class FormBuilder
 {
     public $yaml;
 
-    public function container($app, $misc, $attributes)
+    public function build($app, $misc, $attributes)
     {
         $element = $this->element($app, $misc, $attributes);
 

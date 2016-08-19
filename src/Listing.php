@@ -32,11 +32,8 @@ class Listing extends QueryBuilder
             $label      = element('label', $header);
             $width      = element('width', $header);
 
-            if ($permission) {
-                $allow = $app['acl']->allow($permission);
-                if ($allow === false) {
-                    continue;
-                }
+            if ($permission && !$app['acl']->allow($permission)) {
+                continue;
             }
 
             if ($custom) {
@@ -76,11 +73,8 @@ class Listing extends QueryBuilder
                 $actions    = element('actions', $body);
                 $label      = coalesce($record[$row]);
 
-                if ($permission) {
-                    $allow = $app['acl']->allow($permission);
-                    if ($allow === false) {
-                        continue;
-                    }
+                if ($permission && !$app['acl']->allow($permission)) {
+                    continue;
                 }
 
                 if ($custom) {
