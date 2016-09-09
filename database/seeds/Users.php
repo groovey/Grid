@@ -1,5 +1,7 @@
 <?php
 
+// $ php groovey seed:run Users 100
+
 class Users extends Seeder
 {
     public function init()

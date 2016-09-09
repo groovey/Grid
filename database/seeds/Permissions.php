@@ -1,6 +1,6 @@
 <?php
 
-// NOTE: $ php groovey seed:run Permissions 5
+// php groovey seed:run Permissions 5
 
 use Symfony\Component\Yaml\Yaml;
 
