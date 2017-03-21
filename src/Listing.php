@@ -102,6 +102,7 @@ class Listing extends QueryBuilder
 
     public function renderActions($actions)
     {
+
         $app    = $this->app;
         $delete = element('delete', $actions, false);
         $edit   = element('edit', $actions, false);

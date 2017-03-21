@@ -8,7 +8,7 @@ sql:
     order:
     limit: 10
 
-filters:
+filter:
     -
         permission: user.view
         type: select

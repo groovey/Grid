@@ -47,7 +47,7 @@ class QueryBuilder
     public function composeFilter()
     {
         $app     = $this->app;
-        $filters = $this->yaml['filters'];
+        $filters = $this->yaml['filter'];
         $cond    = [];
 
         foreach ($filters as $filter) {

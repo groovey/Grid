@@ -25,7 +25,7 @@ class Filter extends Html
         $app     = $this->app;
         $yaml    = $this->yaml;
         $html    = '';
-        $filters = coalesce($yaml['filters']);
+        $filters = coalesce($yaml['filter']);
 
         if (!$filters) {
             return '';

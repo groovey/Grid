@@ -31,7 +31,7 @@ $app->register(new ConfigServiceProvider(), [
     ]);
 
 $app->register(new TwigServiceProvider(), [
-        'twig.path' => __DIR__.'/../templates',
+        'twig.path' => __DIR__.'/../resources/templates',
     ]);
 
 $app->register(new DBServiceProvider(), [
@@ -72,8 +72,13 @@ $entry  = $app['grid']->entry->render();
 
 // View
 ?>
+
 <?= $app['form']->open(['method' => 'post']); ?>
+
+<h1>Filter</h1>
 <?= $filter; ?>
+
+<h1>Body</h1>
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
         <?= $header; ?>
@@ -82,8 +87,11 @@ $entry  = $app['grid']->entry->render();
         <?= $body; ?>
     </tbody>
 </table>
+
+<h1>Paging</h1>
 <?= $paging; ?>
 
+<h1>Search</h1>
 <table class="" border="1" cellspacing="6" cellspacing="1">
     <thead>
         <tr>
@@ -103,6 +111,7 @@ $entry  = $app['grid']->entry->render();
     </tbody>
 </table>
 
+<h1>Entry</h1>
 <?= $entry; ?>
 
 <?= $app['form']->close(); ?>
