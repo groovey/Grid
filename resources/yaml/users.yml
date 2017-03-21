@@ -55,6 +55,7 @@ listing:
             custom: { class: 'Groovey\Grid\Custom', action: body}
             align: left
     -
+        permission: user.delete
         header:
             label: Actions
         body:
