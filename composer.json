@@ -22,7 +22,8 @@
         "groovey/paging" : "dev-master",
         "groovey/seeder" : "dev-master",
         "groovey/support" : "dev-master",
-        "groovey/validator" : "dev-master"
+        "groovey/validator" : "dev-master",
+        "groovey/console" : "dev-master"
     },
     "autoload": {
         "psr-4": {
