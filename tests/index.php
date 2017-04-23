@@ -35,17 +35,7 @@ $app->register(new TwigServiceProvider(), [
     ]);
 
 $app->register(new DBServiceProvider(), [
-        'db.connection' => [
-            'host'      => 'localhost',
-            'driver'    => 'mysql',
-            'database'  => 'test_grid',
-            'username'  => 'root',
-            'password'  => '',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-            'logging'   => true,
-        ],
+        'db.connection' => $app['config']->get('database.db')
     ]);
 
 $app->register(new PagingServiceProvider(), [
