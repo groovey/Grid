@@ -35,7 +35,7 @@ $app->register(new TwigServiceProvider(), [
     ]);
 
 $app->register(new DBServiceProvider(), [
-        'db.connection' => $app['config']->get('database.db')
+        'db.connection' => $app['config']->get('database.db'),
     ]);
 
 $app->register(new PagingServiceProvider(), [
